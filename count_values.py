@@ -1,5 +1,4 @@
 #Imports - Are utilized pandas for read sql and write in csv, as well sqlalchemy for database connection.
-
 import pandas as pd
 from sqlalchemy import create_engine
 
@@ -23,9 +22,6 @@ def describe_table(table):
         items_dict[table + '.' + column] = consulta['contagem']
         
     return items_dict
-
-print(describe_table('assuntos_docs'))
-
 
 #Runs the function for all tables of the database.
 for tableDb in tables_from_db['Tables_in_db']:
