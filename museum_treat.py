@@ -87,7 +87,7 @@ class museum_treat():
             \n#db_credentials -> Acces credentials for database in format 'user:password@server'.\
             \n#db_name -> name of database to use.\
             \n#csv_file -> name or path of csv_file.\
-            n#query -> SQL Query. To convert entire table, just put the select table."
+            \n#query -> SQL Query. To convert entire table, just put the select table."
 
             engine = create_engine('mysql+pymysql://{}/{}?charset=utf8'.format(db_credentials, db_name))
             connection = engine.connect()
