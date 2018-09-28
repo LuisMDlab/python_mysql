@@ -38,14 +38,12 @@ class museum_treat():
         cont = 1
         for doc in lista_docs:
             
-            
             print("Inserting document {}".format(doc))
            
             #Join Tables.
             query_df = pd.read_sql_query(query.format(doc), con=connection)
             result_dict={}
             query_dict={}
-    
             
             for column in query_df.columns:
                 query_dict[column] = []
