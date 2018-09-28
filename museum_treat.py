@@ -67,39 +67,38 @@ class museum_treat():
             
             cont+=1
             
-        def csv_to_sql(db_credentials, csv_file, db_name, table_name):
-            "->CSV file to sql table.\n\
-            \n#db_credentials -> Acces credentials for database in format 'user:password@server'.\
-            \n#csv_file -> name or path of csv_file.\
-            \n#db_name -> name of database to use.\
-            \n#table_name -> name of tbale to create and input csv data."
+       def csv_to_sql(db_credentials, csv_file, db_name, table_name):
+           "->CSV file to sql table.\n\
+           \n#db_credentials -> Acces credentials for database in format 'user:password@server'.\
+           \n#csv_file -> name or path of csv_file.\
+           \n#db_name -> name of database to use.\
+           \n#table_name -> name of tbale to create and input csv data."
             
-            engine = create_engine('mysql+pymysql://{}/{}?charset=utf8'.format(db_credentials, db_name))
-            connection = engine.connect()
-            print("Start consersion of csv file, to sql table {}".format(table_name))
-            input_data = pd.read_csv(csv_file, encoding='utf-8')
-            input_data.to_sql(name=table_name, con = connection, schema=db_name, index=False)
-            print("Success!!")
+           engine = create_engine('mysql+pymysql://{}/{}?charset=utf8'.format(db_credentials, db_name))
+           connection = engine.connect()
+           print("Start consersion of csv file, to sql table {}".format(table_name))
+           input_data = pd.read_csv(csv_file, encoding='utf-8')
+           input_data.to_sql(name=table_name, con = connection, schema=db_name, index=False)
+           print("Success!!")
             
-        def sql_to_csv(db_credentials, db_name, query, csv_file):
+       def sql_to_csv(db_credentials, db_name, query, csv_file):
             
-            "->SQL Query to CSV file.\n\
-            \n#db_credentials -> Acces credentials for database in format 'user:password@server'.\
-            \n#db_name -> name of database to use.\
-            \n#csv_file -> name or path of csv_file.\
-            \n#query -> SQL Query. To convert entire table, just put the select table."
+           "->SQL Query to CSV file.\n\
+           \n#db_credentials -> Acces credentials for database in format 'user:password@server'.\
+           \n#db_name -> name of database to use.\
+           \n#csv_file -> name or path of csv_file.\
+           \n#query -> SQL Query. To convert entire table, just put the select table."
 
-            engine = create_engine('mysql+pymysql://{}/{}?charset=utf8'.format(db_credentials, db_name))
-            connection = engine.connect()
+           engine = create_engine('mysql+pymysql://{}/{}?charset=utf8'.format(db_credentials, db_name))
+           connection = engine.connect()
 
-            df = pd.read_sql_query(query, con=connection, coerce_float =False)
+           df = pd.read_sql_query(query, con=connection, coerce_float =False)
 
-            with open(csv_file, "w", newline='', encoding='utf-8') as csv_file:  # Python 3 version    
-                csv_writer = csv.writer(csv_file)
-                csv_writer.writerow(df.columns) # write headers
-                print("Wrinting line")
-                for i in range(len(df)):
-                    print("Wrinting line {}".format(i))
-                    print("{} Remain...".format(len(df)-(i+1)))
-                    csv_writer.writerow(df.iloc[i])
-                    
+           with open(csv_file, "w", newline='', encoding='utf-8') as csv_file:  # Python 3 version    
+               csv_writer = csv.writer(csv_file)
+               csv_writer.writerow(df.columns) # write headers
+               print("Wrinting line")
+               for i in range(len(df)):
+                   print("Wrinting line {}".format(i))
+                   print("{} Remain...".format(len(df)-(i+1)))
+                   csv_writer.writerow(df.iloc[i])
