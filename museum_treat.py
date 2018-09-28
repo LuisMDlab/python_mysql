@@ -41,16 +41,15 @@ class museum_treat():
             
             print("Inserting document {}".format(doc))
            
-            #Utiliza a query de junção das tabelas.
+            #Join Tables.
             query_df = pd.read_sql_query(query.format(doc), con=connection)
             result_dict={}
             query_dict={}
     
-            #Para cada coluna da resultante da query de junção, cria um dicionário com o nome da coluna(key), e uma lista para seus valores.
+            
             for column in query_df.columns:
                 query_dict[column] = []
 
-                #Adiciona os valores resultantes na lista.
                 for iten in query_df[column]:
                     if iten == None or pd.isna(iten):
                         continue
